@@ -1,8 +1,8 @@
-
+import MapWrap from "./component/Map/MapWrap";
 
 function App() {
   return (
-  <div>inital setting</div>
+    <MapWrap/>
   )
 }
 
