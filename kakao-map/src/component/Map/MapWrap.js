@@ -5,7 +5,8 @@ const { kakao } = window; //스크립트로 kakao map api 를 가져오면 windo
 const MapWrap = () => {
   const kakaoDiv = useRef();
   const places = new kakao.maps.services.Places();
-    
+  const infowindow = new kakao.maps.InfoWindow({zindex:1});
+
   useEffect(() => { //화면이 렌더링 되기 전에는 브라우저의 전역 객체인 window를 인식하지 못하기 때문에 사용
     const options = { //map 옵션들
       center: new kakao.maps.LatLng(37.4955, 127.0293), //지도 중심좌표
@@ -26,15 +27,17 @@ const MapWrap = () => {
       }
     };
     function displayMarker(item) {
-      let marker = new kakao.maps.Marker({
+      const marker = new kakao.maps.Marker({
           map: map,
           position: new kakao.maps.LatLng(item.y, item.x) 
       });
+      kakao.maps.event.addListener(marker, 'click', function() { // 마커를 클릭하면 장소명이 인포윈도우에 표출
+        infowindow.setContent('<div style="padding:5px;">' + item.place_name + '</div>');
+        infowindow.open(map, marker);
+    });
     }
-    // const testMarker = new kakao.maps.Marker({position: new kakao.maps.LatLng(37.4955, 127.0293)})
     
-    // testMarker.setMap(map)
-    
+
   }, []);
 
   return <KakaoMap ref={kakaoDiv} />;
