@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Styled from "styled-components";
 
 const { kakao } = window; //스크립트로 kakao map api 를 가져오면 window 전역 객체에 들어감  -> 구조분해 이용
+
 const MapWrap = ({searchKeyword}) => {
   const kakaoDiv = useRef();
   const places = new kakao.maps.services.Places();
