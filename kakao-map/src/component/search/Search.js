@@ -10,7 +10,7 @@ export const Search = () => {
   const [keyword, setKeyword] = useState();
   const dispatch = useDispatch();
   const test = useSelector((state)=>state.search.value)
-  
+  const histroy = useSelector((state)=>state.search.history)
   const onChange = (e)=>{
     setInputVal(e.target.value)
   }
@@ -26,18 +26,23 @@ export const Search = () => {
         <SearchInput onChange={onChange} value={inputVal}/>
         <SearchBtn onClick={()=>dispatch(searchHistory(inputVal))}>검색</SearchBtn>
       </SearchForm>
-        <div>{test}</div>
+        <SearchHistory>
+          {histroy.map((item,index)=>{
+            return <SearchHistoryValue>{item}</SearchHistoryValue>
+          })} 
+        </SearchHistory>
       <MapWrap searchKeyword={keyword}/>
     </>
   )
 }
 
 const SearchForm = styled.form`
-  width : 100vh;
+  position: relative;
   margin : 0 auto;
+  width: 50%;
 `
 const SearchInput = styled.input.attrs({placeholder : "키워드를 입력해주세요."})`
-  width : 20vh;
+  margin : 0 auto;
   margin-left: 0.5vh;
   background-color: lightgray;
   border : none;
@@ -48,3 +53,19 @@ const SearchBtn = styled.button`
   border-radius: 10px;
   border : 1px solid;
 `
+
+const SearchHistory = styled.div`
+  width: 84%;
+  margin: 15px auto 0;
+  text-align: center;
+  &:before {
+    content: "최근검색어 : ";
+  }
+`
+const SearchHistoryValue = styled.div`
+  display: inline-block;
+  margin: 5px 5px;
+  padding: 4px 12px;
+  border: 1px solid #dedfe0;
+  border-radius: 20px;
+`;
