@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import MapWrap from '../Map/MapWrap'
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import { searchHistory } from '../../reducers/history';
+import {useSelector } from 'react-redux'
 
 export const Search = () => {
   const [inputVal, setInputVal] = useState();
   const [keyword, setKeyword] = useState();
-
+  const dispatch = useDispatch();
+  const test = useSelector((state)=>state.search.value)
+  
   const onChange = (e)=>{
     setInputVal(e.target.value)
   }
@@ -19,8 +24,9 @@ export const Search = () => {
     <>
       <SearchForm onSubmit={onSubmit}>
         <SearchInput onChange={onChange} value={inputVal}/>
-        <SearchBtn>검색</SearchBtn>
+        <SearchBtn onClick={()=>dispatch(searchHistory(inputVal))}>검색</SearchBtn>
       </SearchForm>
+        <div>{test}</div>
       <MapWrap searchKeyword={keyword}/>
     </>
   )

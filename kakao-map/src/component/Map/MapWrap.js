@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Styled from "styled-components";
 
 const { kakao } = window; //스크립트로 kakao map api 를 가져오면 window 전역 객체에 들어감  -> 구조분해 이용
-
-const MapWrap = ({searchKeyword}) => {
+const Map = ({searchKeyword}) => {
   const kakaoDiv = useRef();
   const places = new kakao.maps.services.Places();
   const infowindow = new kakao.maps.InfoWindow({zindex:1});
@@ -13,7 +12,7 @@ const MapWrap = ({searchKeyword}) => {
       center: new kakao.maps.LatLng(37.4955, 127.0293), //지도 중심좌표
       level: 3,
     };
-    const map = new kakao.maps.Map(kakaoDiv.current, options);
+    const map = new kakao.maps.Map(kakaoDiv.current , options);
     places.keywordSearch(searchKeyword, callback);
     function callback (result, status) { // 검색 결과 , 바운더리 세팅
       if (status === kakao.maps.services.Status.OK) {
@@ -44,7 +43,7 @@ const MapWrap = ({searchKeyword}) => {
   return <KakaoMap ref={kakaoDiv} />;
 };
 
-export default MapWrap;
+export default Map;
 
 const KakaoMap = Styled.div`
   margin : 0 auto;
