@@ -6,7 +6,7 @@ import { persistReducer } from "redux-persist";
 
 export const searchSlice = createSlice({
   name: "search",
-  initialState: { value: "jaeBalDolAgara" , history : [] },
+  initialState: { value: "jaeBalDolAga~" , history : [] },
   reducers: {
     searchHistory: ( state, action ) => {
       const data = action.payload
@@ -20,13 +20,13 @@ export const searchSlice = createSlice({
 
 const persistConfig = {
   key : 'root',
-  storage
+  storage //store 사용
 }
 
 export const rootReducer = combineReducers({
-  search : searchSlice.reducer
+  search : searchSlice.reducer // Slice 안에 있는 reducer 추가
 })
 
-export const {searchHistory,test11} = searchSlice.actions;
+export const {searchHistory} = searchSlice.actions;
 
-export default persistReducer(persistConfig, searchSlice.reducer)
+export default persistReducer(persistConfig, searchSlice.reducer)  /// 퍼시스트 리듀서 합치기?
