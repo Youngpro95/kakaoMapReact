@@ -41,7 +41,7 @@ const SearchForm = styled.form`
   margin : 0 auto;
   width: 50%;
 `
-const SearchInput = styled.input.attrs({placeholder : "키워드를 입력해주세요."})`
+const SearchInput = styled.input.attrs({placeholder : "키워드를 입력해주세요."})` //place holder 설정법
   margin : 0 auto;
   margin-left: 0.5vh;
   background-color: lightgray;
